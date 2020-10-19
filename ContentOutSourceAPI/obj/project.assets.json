@@ -9240,11 +9240,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SWD\\ContentOutSourceAPI\\ContentOutSourceAPI\\ContentOutSourceAPI.csproj",
+      "projectUniqueName": "D:\\SWD\\SWD_API\\ContentOutSourceAPI\\ContentOutSourceAPI.csproj",
       "projectName": "ContentOutSourceAPI",
-      "projectPath": "D:\\SWD\\ContentOutSourceAPI\\ContentOutSourceAPI\\ContentOutSourceAPI.csproj",
+      "projectPath": "D:\\SWD\\SWD_API\\ContentOutSourceAPI\\ContentOutSourceAPI.csproj",
       "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-      "outputPath": "D:\\SWD\\ContentOutSourceAPI\\ContentOutSourceAPI\\obj\\",
+      "outputPath": "D:\\SWD\\SWD_API\\ContentOutSourceAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

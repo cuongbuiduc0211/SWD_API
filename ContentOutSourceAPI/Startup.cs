@@ -21,9 +21,18 @@ namespace ContentOutSourceAPI
 
         public IConfiguration Configuration { get; }
 
+        const string AllowAllOriginsPolicy = "accept";
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(AllowAllOriginsPolicy, builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+            });
+
             var connection = Configuration.GetConnectionString("ContentOursource");
             services.AddDbContextPool<ContentOursourceContext>(options => options.UseSqlServer(connection));
             services.AddControllers();
@@ -56,6 +65,8 @@ namespace ContentOutSourceAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(AllowAllOriginsPolicy);
 
             app.UseAuthorization();
 
