@@ -8,6 +8,7 @@ namespace ContentOutSourceAPI.Models
         public int Id { get; set; }
         public string Username { get; set; }
         public int PostId { get; set; }
+        public string Status { get; set; }
 
         public virtual TblPosts Post { get; set; }
         public virtual TblUsers UsernameNavigation { get; set; }

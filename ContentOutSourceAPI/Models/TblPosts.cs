@@ -14,8 +14,13 @@ namespace ContentOutSourceAPI.Models
 
         public int Id { get; set; }
         public string Title { get; set; }
+        public string Description { get; set; }
         public int? CharacterLimit { get; set; }
         public long Amount { get; set; }
+        public string PostType { get; set; }
+        public string RelatedDocument { get; set; }
+        public Boolean IsPublic { get; set; }
+        public DateTime CreatedDate { get; set; }
         public string Status { get; set; }
 
         public virtual ICollection<PostHistory> PostHistory { get; set; }

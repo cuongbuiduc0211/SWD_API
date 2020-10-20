@@ -17,7 +17,11 @@ namespace ContentOutSourceAPI.Models
         public string Password { get; set; }
         public int RoleId { get; set; }
         public long Amount { get; set; }
+        public string Fullname { get; set; }
+        public int Rating { get; set; }
+        public string Avatar { get; set; }
         public string Status { get; set; }
+       
 
         public virtual TblRoles Role { get; set; }
         public virtual ICollection<PostHistory> PostHistory { get; set; }
