@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ContentOutSourceAPI.Models;
 using ContentOutSourceAPI.Validators;
+using ContentOutSourceAPI.DTO;
 
 namespace ContentOutSourceAPI.Controllers
 {
@@ -21,6 +22,17 @@ namespace ContentOutSourceAPI.Controllers
             _context = context;
         }
 
+        [HttpGet("totalPostAndUser")]
+        public async Task<ActionResult<NumberDTO>> GetTotalPostAndUser()
+        {
+            NumberDTO numberDTO = new NumberDTO();
+            numberDTO.totalPost = _context.TblPosts.Count();
+            numberDTO.totalFreelancer = _context.TblUsers
+                .FromSqlRaw("select Username from TblUsers where RoleId = 2").Count();
+            numberDTO.totalCompany = _context.TblUsers
+                .FromSqlRaw("select Username from TblUsers where RoleId = 3").Count();
+            return numberDTO;
+        }
        
 
         [HttpPost("login")]
