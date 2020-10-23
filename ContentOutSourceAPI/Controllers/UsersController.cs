@@ -35,6 +35,34 @@ namespace ContentOutSourceAPI.Controllers
         }
 
 
+        [HttpPost("listFreelancer")]
+        public async Task<ActionResult<List<TblUsers>>> ListFreelancer() {
+            List<TblUsers> listFreelancer = _context.TblUsers
+                .FromSqlRaw("select * from TblUsers where RoleId = 2").ToList<TblUsers>();
+            
+            if (listFreelancer.Count > 0)
+            {
+                return listFreelancer;
+            }
+
+            return BadRequest();
+        }
+
+        [HttpPost("listCompany")]
+        public async Task<ActionResult<List<TblUsers>>> listCompany()
+        {
+            List<TblUsers> listCompany = _context.TblUsers
+                .FromSqlRaw("select * from TblUsers where RoleId = 3").ToList<TblUsers>();
+
+            if (listCompany.Count > 0)
+            {
+                return listCompany;
+            }
+
+            return BadRequest();
+        }
+
+
         [HttpPost("login")]
         public async Task<ActionResult<TblUsers>> CheckLogin (TblUsers admin)
         {
