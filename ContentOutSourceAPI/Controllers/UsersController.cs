@@ -33,21 +33,26 @@ namespace ContentOutSourceAPI.Controllers
                 .FromSqlRaw("select Username from TblUsers where RoleId = 3").Count();
             return numberDTO;
         }
-       
+
 
         [HttpPost("login")]
-        public async Task<ActionResult<TblUsers>> CheckLogin (TblUsers user)
+        public async Task<ActionResult<TblUsers>> CheckLogin (TblUsers admin)
         {
-            TblUsers userEntity = _context.TblUsers.Find(user.Username);
+            TblUsers userEntity = _context.TblUsers.Find(admin.Username);
             if(userEntity != null)
             {
-                if (userEntity.Password.Equals(user.Password))
+                if(userEntity.RoleId == 1)
                 {
-                    return userEntity;
+                    if (userEntity.Password.Equals(admin.Password))
+                    {
+                        return userEntity;
+                    }
                 }
             }
             return Unauthorized();
         }
+
+
 
         //GET: api/Users
        [HttpGet]
