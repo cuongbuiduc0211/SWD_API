@@ -20,6 +20,48 @@ namespace ContentOutSourceAPI.Controllers
             _context = context;
         }
 
+        [HttpGet("WriterPost")]
+        public async Task<ActionResult<List<TblPosts>>> GetWriterPost()
+        {
+            List<TblPosts> writerPostList = _context.TblPosts
+                .FromSqlRaw("select * from TblPosts where PostType = 'Writer'").ToList<TblPosts>();
+
+            if (writerPostList.Count > 0)
+            {
+                return writerPostList;
+            }
+
+            return BadRequest();
+        }
+
+        [HttpGet("TranslatePost")]
+        public async Task<ActionResult<List<TblPosts>>> GetTranslatePost()
+        {
+            List<TblPosts> translatePostList = _context.TblPosts
+                .FromSqlRaw("select * from TblPosts where PostType = 'Translate'").ToList<TblPosts>();
+
+            if (translatePostList.Count > 0)
+            {
+                return translatePostList;
+            }
+
+            return BadRequest();
+        }
+
+        [HttpGet("DesignPost")]
+        public async Task<ActionResult<List<TblPosts>>> GetDesignPost()
+        {
+            List<TblPosts> designPostList = _context.TblPosts
+                .FromSqlRaw("select * from TblPosts where PostType = 'Design'").ToList<TblPosts>();
+
+            if (designPostList.Count > 0)
+            {
+                return designPostList;
+            }
+
+            return BadRequest();
+        }
+
         // GET: api/Posts
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TblPosts>>> GetTblPosts()

@@ -35,7 +35,7 @@ namespace ContentOutSourceAPI.Controllers
         }
 
 
-        [HttpPost("listFreelancer")]
+        [HttpGet("listFreelancer")]
         public async Task<ActionResult<List<TblUsers>>> ListFreelancer() {
             List<TblUsers> listFreelancer = _context.TblUsers
                 .FromSqlRaw("select * from TblUsers where RoleId = 2").ToList<TblUsers>();
@@ -48,7 +48,7 @@ namespace ContentOutSourceAPI.Controllers
             return BadRequest();
         }
 
-        [HttpPost("listCompany")]
+        [HttpGet("listCompany")]
         public async Task<ActionResult<List<TblUsers>>> listCompany()
         {
             List<TblUsers> listCompany = _context.TblUsers
@@ -62,6 +62,7 @@ namespace ContentOutSourceAPI.Controllers
             return BadRequest();
         }
 
+        
 
         [HttpPost("login")]
         public async Task<ActionResult<TblUsers>> CheckLogin (TblUsers admin)
@@ -79,7 +80,6 @@ namespace ContentOutSourceAPI.Controllers
             }
             return Unauthorized();
         }
-
 
 
         //GET: api/Users
