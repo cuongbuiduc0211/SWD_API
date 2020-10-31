@@ -21,12 +21,12 @@ namespace ContentOutSourceAPI.Controllers
         }
 
         [HttpGet("requestedPost")]
-        public async Task<ActionResult<List<TblUsersHavingPosts>>> GetRequestedPost()
+        public async Task<ActionResult<List<TblPosts>>> GetRequestedPost()
         {
-            List<TblUsersHavingPosts> list = _context.TblUsersHavingPosts
+            List<TblPosts> list = _context.TblPosts
                 .FromSqlRaw("select p.* from tblPosts p, tblUsersHavingPosts u " +
                 "where p.Id = u.PostId and u.Status = 'requested'")
-                .ToList<TblUsersHavingPosts>();
+                .ToList<TblPosts>();
 
             if (list.Count > 0)
             {
@@ -37,12 +37,12 @@ namespace ContentOutSourceAPI.Controllers
         }
 
         [HttpGet("acceptedPost")]
-        public async Task<ActionResult<List<TblUsersHavingPosts>>> GetAcceptedPost()
+        public async Task<ActionResult<List<TblPosts>>> GetAcceptedPost()
         {
-            List<TblUsersHavingPosts> list = _context.TblUsersHavingPosts
+            List<TblPosts> list = _context.TblPosts
                 .FromSqlRaw("select p.* from tblPosts p, tblUsersHavingPosts u " +
                 "where p.Id = u.PostId and u.Status = 'accepted'")
-                .ToList<TblUsersHavingPosts>();
+                .ToList<TblPosts>();
 
             if (list.Count > 0)
             {
