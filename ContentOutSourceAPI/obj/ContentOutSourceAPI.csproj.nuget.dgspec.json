@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SWD\\SWD_API\\ContentOutSourceAPI\\ContentOutSourceAPI.csproj": {}
+    "D:\\Half8\\SWD\\SWD_API\\ContentOutSourceAPI\\ContentOutSourceAPI.csproj": {}
   },
   "projects": {
-    "D:\\SWD\\SWD_API\\ContentOutSourceAPI\\ContentOutSourceAPI.csproj": {
+    "D:\\Half8\\SWD\\SWD_API\\ContentOutSourceAPI\\ContentOutSourceAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SWD\\SWD_API\\ContentOutSourceAPI\\ContentOutSourceAPI.csproj",
+        "projectUniqueName": "D:\\Half8\\SWD\\SWD_API\\ContentOutSourceAPI\\ContentOutSourceAPI.csproj",
         "projectName": "ContentOutSourceAPI",
-        "projectPath": "D:\\SWD\\SWD_API\\ContentOutSourceAPI\\ContentOutSourceAPI.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "D:\\SWD\\SWD_API\\ContentOutSourceAPI\\obj\\",
+        "projectPath": "D:\\Half8\\SWD\\SWD_API\\ContentOutSourceAPI\\ContentOutSourceAPI.csproj",
+        "packagesPath": "C:\\Users\\Sony\\.nuget\\packages\\",
+        "outputPath": "D:\\Half8\\SWD\\SWD_API\\ContentOutSourceAPI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Sony\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -102,7 +99,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

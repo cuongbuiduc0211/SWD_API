@@ -139,22 +139,18 @@ namespace ContentOutSourceAPI.Models
             {
                 entity.ToTable("tblUsersHavingPosts");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Status).HasMaxLength(100);
 
-                entity.Property(e => e.Username)
-                    .IsRequired()
-                    .HasMaxLength(100);
+                entity.Property(e => e.Username).HasMaxLength(100);
 
                 entity.HasOne(d => d.Post)
                     .WithMany(p => p.TblUsersHavingPosts)
                     .HasForeignKey(d => d.PostId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__tblUsersH__PostI__34C8D9D1");
 
                 entity.HasOne(d => d.UsernameNavigation)
                     .WithMany(p => p.TblUsersHavingPosts)
                     .HasForeignKey(d => d.Username)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__tblUsersH__Usern__33D4B598");
             });
 

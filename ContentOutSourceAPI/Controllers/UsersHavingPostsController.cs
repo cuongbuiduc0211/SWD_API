@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ContentOutSourceAPI.Models;
+using ContentOutSourceAPI.DTO;
 
 namespace ContentOutSourceAPI.Controllers
 {
@@ -144,6 +145,36 @@ namespace ContentOutSourceAPI.Controllers
             await _context.SaveChangesAsync();
 
             return tblUsersHavingPosts;
+        }
+
+
+        [HttpPost("requestedPost")]
+        public async Task<ActionResult<TblUsersHavingPosts>> GetRequestedPost(RequestedPost requestedPost)
+        {
+            TblUsersHavingPosts tblUsersHavingPosts = new TblUsersHavingPosts();
+            tblUsersHavingPosts.Username = requestedPost.Username;
+            tblUsersHavingPosts.PostId = requestedPost.PostId;
+            tblUsersHavingPosts.Status = requestedPost.Status;
+
+            _context.TblUsersHavingPosts.Add(tblUsersHavingPosts);
+            await _context.SaveChangesAsync();
+            //try
+            //{
+               
+            //}
+            //catch (DbUpdateException)
+            //{
+            //    if (TblUsersHavingPostsExists(tblUsersHavingPosts.Id))
+            //    {
+            //        return Conflict();
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }
+            //}
+
+            return CreatedAtAction("GetTblUsersHavingPosts", new { id = tblUsersHavingPosts.Id }, tblUsersHavingPosts);
         }
 
         private bool TblUsersHavingPostsExists(int id)
