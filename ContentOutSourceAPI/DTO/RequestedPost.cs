@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 namespace ContentOutSourceAPI.DTO
 {
     public class RequestedPost
-    {
-        public int Id { get; set; }
+    {       
         public string Username { get; set; }
         public int PostId { get; set; }
         public string Status { get; set; }
