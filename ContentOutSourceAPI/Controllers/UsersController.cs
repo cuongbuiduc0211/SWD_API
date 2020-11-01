@@ -82,9 +82,9 @@ namespace ContentOutSourceAPI.Controllers
         }
 
         [HttpPost("loginUser")]
-        public async Task<ActionResult<TblUsers>> CheckLoginUser (string username, string fullname, string avatar)
+        public async Task<ActionResult<TblUsers>> CheckLoginUser ([FromBody]LoginUserDTO loginUserDTO)
         {
-            TblUsers userEntity = _context.TblUsers.Find(username);
+            TblUsers userEntity = _context.TblUsers.Find(loginUserDTO.Username);
             Console.WriteLine("kk");
             if (userEntity != null)
             {
@@ -96,12 +96,12 @@ namespace ContentOutSourceAPI.Controllers
             else
             {
                 TblUsers dto = new TblUsers();
-                dto.Username = username;
+                dto.Username = loginUserDTO.Username;
                 dto.Password = "1";
                 dto.RoleId = 2;
-                dto.Fullname = fullname;
+                dto.Fullname = loginUserDTO.Fullname;
                 dto.Rating = 0;
-                dto.Avatar = avatar;
+                dto.Avatar = loginUserDTO.Avatar;
                 dto.Status = "active";
                 _context.TblUsers.Add(dto);
                 await _context.SaveChangesAsync();
