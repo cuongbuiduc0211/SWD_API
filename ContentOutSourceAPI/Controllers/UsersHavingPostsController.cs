@@ -28,30 +28,25 @@ namespace ContentOutSourceAPI.Controllers
                 .FromSqlRaw("select * from tblPosts where Id in " +
                 "(select PostId from tblUsersHavingPosts where Username = {0} and Status = 'requested')", usernameDTO.Username)
                 .ToList<TblPosts>();
-
             if (list.Count > 0)
             {
                 return list;
             }
-
-            return BadRequest();
+            return null;
         }
 
         [HttpPost("acceptedPosts")]
         public async Task<ActionResult<List<TblPosts>>> GetAcceptedPost(UsernameDTO usernameDTO)
         {
-
             List<TblPosts> list = _context.TblPosts
                 .FromSqlRaw("select * from tblPosts where Id in " +
                 "(select PostId from tblUsersHavingPosts where Username = {0} and Status = 'accepted')", usernameDTO.Username)
                 .ToList<TblPosts>();
-
             if (list.Count > 0)
             {
                 return list;
             }
-
-            return BadRequest();
+            return null;
         }
 
         // GET: api/UsersHavingPosts
