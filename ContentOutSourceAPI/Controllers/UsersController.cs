@@ -64,8 +64,8 @@ namespace ContentOutSourceAPI.Controllers
 
         
 
-        [HttpPost("login")]
-        public async Task<ActionResult<TblUsers>> CheckLogin (TblUsers admin)
+        [HttpPost("loginAdmin")]
+        public async Task<ActionResult<TblUsers>> CheckLoginAdmin (TblUsers admin)
         {
             TblUsers userEntity = _context.TblUsers.Find(admin.Username);
             if(userEntity != null)
@@ -81,9 +81,38 @@ namespace ContentOutSourceAPI.Controllers
             return Unauthorized();
         }
 
+        [HttpPost("loginUser")]
+        public async Task<ActionResult<TblUsers>> CheckLoginUser (string username, string fullname, string avatar)
+        {
+            TblUsers userEntity = _context.TblUsers.Find(username);
+            Console.WriteLine("kk");
+            if (userEntity != null)
+            {
+                if (userEntity.RoleId == 2)
+                {
+                    return userEntity;
+                }
+            }
+            else
+            {
+                TblUsers dto = new TblUsers();
+                dto.Username = username;
+                dto.Password = "1";
+                dto.RoleId = 2;
+                dto.Fullname = fullname;
+                dto.Rating = 0;
+                dto.Avatar = avatar;
+                dto.Status = "active";
+                _context.TblUsers.Add(dto);
+                await _context.SaveChangesAsync();
+                return dto;
+            }
+            return Unauthorized();
+        }
+
 
         //GET: api/Users
-       [HttpGet]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<TblUsers>>> GetTblUsers()
         {
             return await _context.TblUsers.ToListAsync();
