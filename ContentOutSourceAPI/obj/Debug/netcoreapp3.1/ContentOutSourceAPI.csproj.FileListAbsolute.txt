@@ -497,3 +497,4 @@ D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourc
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.pdb
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.genruntimeconfig.cache
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\thanhdeptrai - Web Deploy\profile.arm.json
+D:\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\thanhdeptrai - Web Deploy\profile.arm.json

@@ -21,12 +21,12 @@ namespace ContentOutSourceAPI.Controllers
             _context = context;
         }
 
-        [HttpGet("requestedPost/{username}")]
-        public async Task<ActionResult<List<TblPosts>>> GetRequestedPost(string username)
+        [HttpPost("requestedPosts")]
+        public async Task<ActionResult<List<TblPosts>>> GetRequestedPost(UsernameDTO usernameDTO)
         {
             List<TblPosts> list = _context.TblPosts
                 .FromSqlRaw("select * from tblPosts where Id in " +
-                "(select PostId from tblUsersHavingPosts where Username = {0} and Status = 'requested')", username)
+                "(select PostId from tblUsersHavingPosts where Username = {0} and Status = 'requested')", usernameDTO.Username)
                 .ToList<TblPosts>();
 
             if (list.Count > 0)
@@ -37,12 +37,13 @@ namespace ContentOutSourceAPI.Controllers
             return BadRequest();
         }
 
-        [HttpGet("acceptedPost/{username}")]
-        public async Task<ActionResult<List<TblPosts>>> GetAcceptedPost(string username)
+        [HttpPost("acceptedPosts")]
+        public async Task<ActionResult<List<TblPosts>>> GetAcceptedPost(UsernameDTO usernameDTO)
         {
+
             List<TblPosts> list = _context.TblPosts
                 .FromSqlRaw("select * from tblPosts where Id in " +
-                "(select PostId from tblUsersHavingPosts where Username = {0} and Status = 'accepted')", username)
+                "(select PostId from tblUsersHavingPosts where Username = {0} and Status = 'accepted')", usernameDTO.Username)
                 .ToList<TblPosts>();
 
             if (list.Count > 0)

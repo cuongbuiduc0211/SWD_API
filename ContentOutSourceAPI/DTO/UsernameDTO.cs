@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace ContentOutSourceAPI.DTO
 {
-    public class RequestedPost
+    public class UsernameDTO
     {
         public string Username { get; set; }
-        public int PostId { get; set; }
-        public string Status { get; set; }
     }
 }
