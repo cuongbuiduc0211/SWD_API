@@ -85,7 +85,6 @@ namespace ContentOutSourceAPI.Controllers
         public async Task<ActionResult<TblUsers>> CheckLoginUser ([FromBody]LoginUserDTO loginUserDTO)
         {
             TblUsers userEntity = _context.TblUsers.Find(loginUserDTO.Username);
-            Console.WriteLine("kk");
             if (userEntity != null)
             {
                 if (userEntity.RoleId == 2)

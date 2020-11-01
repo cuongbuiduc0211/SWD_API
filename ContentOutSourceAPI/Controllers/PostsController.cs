@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ContentOutSourceAPI.Models;
+using ContentOutSourceAPI.DTO;
 
 namespace ContentOutSourceAPI.Controllers
 {
@@ -14,25 +15,60 @@ namespace ContentOutSourceAPI.Controllers
     public class PostsController : ControllerBase
     {
         private readonly ContentOursourceContext _context;
+        
 
         public PostsController(ContentOursourceContext context)
         {
             _context = context;
         }
 
-        [HttpGet("WriterPost")]
-        public async Task<ActionResult<List<TblPosts>>> GetWriterPost()
+        [HttpPost("WriterPost")]
+        public async Task<ActionResult<List<TblPosts>>> GetWriterPost([FromBody]UsernameDTO usernameDTO)
         {
-            List<TblPosts> writerPostList = _context.TblPosts
-                .FromSqlRaw("select * from TblPosts where PostType = 'Writer'").ToList<TblPosts>();
+            List<TblUsersHavingPosts> list = _context.TblUsersHavingPosts
+                .FromSqlRaw("select * from TblUsersHavingPosts")
+                .ToList<TblUsersHavingPosts>();
+            List<TblPosts> listPost = _context.TblPosts
+                .FromSqlRaw("select * from TblPosts")
+                .ToList<TblPosts>();
 
-            if (writerPostList.Count > 0)
+            List<int> listPostId = new List<int>();
+            List<TblPosts> listPostResponse = new List<TblPosts>();
+
+            for (int i = 0; i < list.Count; i++)
             {
-                return writerPostList;
+                TblUsersHavingPosts current = list[i];
+                if (usernameDTO.Username.Equals(current.Username))
+                {
+
+                    listPostId.Add(current.PostId);
+
+
+                }
             }
 
-            return BadRequest();
-        }
+           
+
+            for (int i = 0; i < listPostId.Count; i++)
+            {
+                int currentId = listPostId[i];
+                for (int j = 0; j < listPost.Count; j++)
+                {
+                    TblPosts currentPost = listPost[j];
+                    if (currentPost.Id != currentId)
+                    {
+                        listPostResponse.Add(currentPost);
+                    }
+
+                }
+            }
+            return listPostResponse;
+
+
+               
+
+            }
+
 
         [HttpGet("TranslatePost")]
         public async Task<ActionResult<List<TblPosts>>> GetTranslatePost()

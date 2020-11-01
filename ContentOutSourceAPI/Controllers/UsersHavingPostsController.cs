@@ -35,16 +35,24 @@ namespace ContentOutSourceAPI.Controllers
             return null;
         }
 
+        
         [HttpPost("acceptedPosts")]
         public async Task<ActionResult<List<TblPosts>>> GetAcceptedPost(UsernameDTO usernameDTO)
         {
-            List<TblPosts> list = _context.TblPosts
+            
+            List<TblUsersHavingPosts> listRequested = _context.TblUsersHavingPosts
+                .FromSqlRaw("select * from tblUsersHavingPosts where Username = {0} and Status = 'requested'", usernameDTO.Username)
+                .ToList<TblUsersHavingPosts>();
+            List<TblPosts> listAccepted = _context.TblPosts
                 .FromSqlRaw("select * from tblPosts where Id in " +
                 "(select PostId from tblUsersHavingPosts where Username = {0} and Status = 'accepted')", usernameDTO.Username)
                 .ToList<TblPosts>();
-            if (list.Count > 0)
+            if (listAccepted.Count > 0)
             {
-                return list;
+                _context.TblUsersHavingPosts.RemoveRange(listRequested);
+                await _context.SaveChangesAsync();
+                return listAccepted;
+               
             }
             return null;
         }
