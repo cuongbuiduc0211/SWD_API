@@ -43,7 +43,7 @@ namespace ContentOutSourceAPI.Controllers
             return CreatedAtAction("GetTblUsersHavingPosts", new { id = tblUsersHavingPosts.Id }, tblUsersHavingPosts);
         }
 
-        [HttpDelete("requestedPost")]
+        [HttpPost("removeRequestedPost")]
         public async Task<ActionResult<TblUsersHavingPosts>> RemoveRequestedPost(RequestedPost requestedPost)
         {
             TblUsersHavingPosts tblUsersHavingPosts = new TblUsersHavingPosts();
