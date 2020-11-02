@@ -163,3 +163,6 @@ D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Release\netcoreapp3.1\staticwebasse
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Release\netcoreapp3.1\ContentOutSourceAPI.dll
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Release\netcoreapp3.1\ContentOutSourceAPI.pdb
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Release\netcoreapp3.1\ContentOutSourceAPI.genruntimeconfig.cache
+D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Release\netcoreapp3.1\Newtonsoft.Json.Bson.dll

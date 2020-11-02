@@ -25,77 +25,128 @@ namespace ContentOutSourceAPI.Controllers
         [HttpPost("WriterPost")]
         public async Task<ActionResult<List<TblPosts>>> GetWriterPost([FromBody]UsernameDTO usernameDTO)
         {
-            List<TblUsersHavingPosts> list = _context.TblUsersHavingPosts
-                .FromSqlRaw("select * from TblUsersHavingPosts")
-                .ToList<TblUsersHavingPosts>();
+           List<TblPosts> listNotHaving = getListPostNotInHavingPosts(usernameDTO.Username);
+            List<TblPosts> listResponse = new List<TblPosts>();
+           
+            for(int i = 0; i < listNotHaving.Count; i++)
+            {
+                TblPosts currentPost = listNotHaving[i];
+                if (currentPost.PostType.Equals("Writer"))
+                {
+                    listResponse.Add(currentPost);
+                }
+            }
+
+            return listResponse;
+
+         }
+
+
+        //Hàm này trả về list Post không có trong tblUserHavingPosts
+        private List<TblPosts> getListPostNotInHavingPosts(string username)
+        {
+            List<TblUsersHavingPosts> listHavingPosts = _context.TblUsersHavingPosts
+               .FromSqlRaw("select * from TblUsersHavingPosts")
+               .ToList<TblUsersHavingPosts>();
             List<TblPosts> listPost = _context.TblPosts
                 .FromSqlRaw("select * from TblPosts")
                 .ToList<TblPosts>();
 
             List<int> listPostId = new List<int>();
-            List<TblPosts> listPostResponse = new List<TblPosts>();
+            List<TblPosts> listPostResponse = listPost;
 
-            for (int i = 0; i < list.Count; i++)
+            //Lấy ra listPostId
+            for (int i = 0; i < listHavingPosts.Count; i++)
             {
-                TblUsersHavingPosts current = list[i];
-                if (usernameDTO.Username.Equals(current.Username))
+                TblUsersHavingPosts current = listHavingPosts[i];
+                if (username.Equals(current.Username))
                 {
-
                     listPostId.Add(current.PostId);
-
-
                 }
             }
 
-           
 
             for (int i = 0; i < listPostId.Count; i++)
             {
                 int currentId = listPostId[i];
-                for (int j = 0; j < listPost.Count; j++)
+                for (int j = 0; j < listPostResponse.Count; j++)
                 {
-                    TblPosts currentPost = listPost[j];
-                    if (currentPost.Id != currentId)
+                    TblPosts currentPost = listPostResponse[j];
+                    if (currentId == currentPost.Id)
                     {
-                        listPostResponse.Add(currentPost);
+                        int index = findIndexByIdPodst(currentPost.Id, listPostResponse);
+                        if (index != -1)
+                        {
+                            listPostResponse.RemoveAt(index);
+                            break;
+                        }
+
                     }
-
                 }
+
             }
+
+
+
             return listPostResponse;
-
-
-               
-
-            }
-
-
-        [HttpGet("TranslatePost")]
-        public async Task<ActionResult<List<TblPosts>>> GetTranslatePost()
-        {
-            List<TblPosts> translatePostList = _context.TblPosts
-                .FromSqlRaw("select * from TblPosts where PostType = 'Translate'").ToList<TblPosts>();
-
-            if (translatePostList.Count > 0)
-            {
-                return translatePostList;
-            }
-
-            return BadRequest();
         }
 
-        [HttpGet("DesignPost")]
-        public async Task<ActionResult<List<TblPosts>>> GetDesignPost()
-        {
-            List<TblPosts> designPostList = _context.TblPosts
-                .FromSqlRaw("select * from TblPosts where PostType = 'Design'").ToList<TblPosts>();
 
-            if (designPostList.Count > 0)
+        //Hàm này trả về index trong 1 list
+        private int findIndexByIdPodst(int id, List<TblPosts> listPostResponse)
+        {
+            
+
+            for(int i = 0; i < listPostResponse.Count; i++)
             {
-                return designPostList;
+                TblPosts currentPost = listPostResponse[i];
+
+                if(currentPost.Id == id)
+                {
+                    return i;
+                }
+
+            }
+            return -1;
+        }
+
+
+        [HttpPost("TranslatePost")]
+        public async Task<ActionResult<List<TblPosts>>> GetTranslatePost([FromBody] UsernameDTO usernameDTO)
+        {
+            List<TblPosts> listNotHaving = getListPostNotInHavingPosts(usernameDTO.Username);
+            List<TblPosts> listResponse = new List<TblPosts>();
+
+            for (int i = 0; i < listNotHaving.Count; i++)
+            {
+                TblPosts currentPost = listNotHaving[i];
+                if (currentPost.PostType.Equals("Translate"))
+                {
+                    listResponse.Add(currentPost);
+                }
             }
 
-            return BadRequest();
+            return listResponse;
+
+        }
+
+        [HttpPost("DesignPost")]
+        public async Task<ActionResult<List<TblPosts>>> GetDesignPost([FromBody] UsernameDTO usernameDTO)
+        {
+            List<TblPosts> listNotHaving = getListPostNotInHavingPosts(usernameDTO.Username);
+            List<TblPosts> listResponse = new List<TblPosts>();
+
+            for (int i = 0; i < listNotHaving.Count; i++)
+            {
+                TblPosts currentPost = listNotHaving[i];
+                if (currentPost.PostType.Equals("Design"))
+                {
+                    listResponse.Add(currentPost);
+                }
+            }
+
+            return listResponse;
+
         }
 
         // GET: api/Posts
