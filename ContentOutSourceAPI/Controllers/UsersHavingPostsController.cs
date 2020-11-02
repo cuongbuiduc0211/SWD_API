@@ -21,8 +21,50 @@ namespace ContentOutSourceAPI.Controllers
             _context = context;
         }
 
+        [HttpPost("requestedPost")]
+        public async Task<ActionResult<TblUsersHavingPosts>> AddRequestedPost(RequestedPost requestedPost)
+        {
+            TblUsersHavingPosts tblUsersHavingPosts = new TblUsersHavingPosts();
+            tblUsersHavingPosts.Username = requestedPost.Username;
+            tblUsersHavingPosts.PostId = requestedPost.PostId;
+            tblUsersHavingPosts.Status = requestedPost.Status;
+            List<TblUsersHavingPosts> listAccepted = _context.TblUsersHavingPosts
+                .FromSqlRaw("select * from TblUsersHavingPosts where Username = {0} and Status = 'accepted'", tblUsersHavingPosts.Username)
+                .ToList<TblUsersHavingPosts>();
+            if (listAccepted.Count > 0)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                _context.TblUsersHavingPosts.Add(tblUsersHavingPosts);
+            }
+            await _context.SaveChangesAsync();
+            return CreatedAtAction("GetTblUsersHavingPosts", new { id = tblUsersHavingPosts.Id }, tblUsersHavingPosts);
+        }
+
+        [HttpDelete("requestedPost")]
+        public async Task<ActionResult<TblUsersHavingPosts>> RemoveRequestedPost(RequestedPost requestedPost)
+        {
+            TblUsersHavingPosts tblUsersHavingPosts = new TblUsersHavingPosts();
+            tblUsersHavingPosts.Username = requestedPost.Username;
+            tblUsersHavingPosts.PostId = requestedPost.PostId;
+            tblUsersHavingPosts.Status = requestedPost.Status;
+            List<TblUsersHavingPosts> alreadyRequestedPost = _context.TblUsersHavingPosts
+                .FromSqlRaw("select * from TblUsersHavingPosts where Username = {0} and PostId = {1} " +
+                "and Status = 'requested'", tblUsersHavingPosts.Username, tblUsersHavingPosts.PostId)
+                .ToList<TblUsersHavingPosts>();
+            if (alreadyRequestedPost.Count > 0)
+            {
+                _context.TblUsersHavingPosts.RemoveRange(alreadyRequestedPost);
+            }
+            await _context.SaveChangesAsync();
+            return CreatedAtAction("GetTblUsersHavingPosts", new { id = tblUsersHavingPosts.Id }, tblUsersHavingPosts);
+
+        }
+
         [HttpPost("requestedPosts")]
-        public async Task<ActionResult<List<TblPosts>>> GetRequestedPost(UsernameDTO usernameDTO)
+        public async Task<ActionResult<List<TblPosts>>> GetRequestedPosts(UsernameDTO usernameDTO)
         {
             List<TblPosts> list = _context.TblPosts
                 .FromSqlRaw("select * from tblPosts where Id in " +
@@ -37,7 +79,7 @@ namespace ContentOutSourceAPI.Controllers
 
         
         [HttpPost("acceptedPosts")]
-        public async Task<ActionResult<List<TblPosts>>> GetAcceptedPost(UsernameDTO usernameDTO)
+        public async Task<ActionResult<List<TblPosts>>> GetAcceptedPosts(UsernameDTO usernameDTO)
         {
             
             List<TblUsersHavingPosts> listRequested = _context.TblUsersHavingPosts
@@ -153,34 +195,7 @@ namespace ContentOutSourceAPI.Controllers
         }
 
 
-        [HttpPost("requestedPost")]
-        public async Task<ActionResult<TblUsersHavingPosts>> GetRequestedPost(RequestedPost requestedPost)
-        {
-            TblUsersHavingPosts tblUsersHavingPosts = new TblUsersHavingPosts();
-            tblUsersHavingPosts.Username = requestedPost.Username;
-            tblUsersHavingPosts.PostId = requestedPost.PostId;
-            tblUsersHavingPosts.Status = requestedPost.Status;
-
-            _context.TblUsersHavingPosts.Add(tblUsersHavingPosts);
-            await _context.SaveChangesAsync();
-            //try
-            //{
-               
-            //}
-            //catch (DbUpdateException)
-            //{
-            //    if (TblUsersHavingPostsExists(tblUsersHavingPosts.Id))
-            //    {
-            //        return Conflict();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
-
-            return CreatedAtAction("GetTblUsersHavingPosts", new { id = tblUsersHavingPosts.Id }, tblUsersHavingPosts);
-        }
+        
 
         private bool TblUsersHavingPostsExists(int id)
         {
