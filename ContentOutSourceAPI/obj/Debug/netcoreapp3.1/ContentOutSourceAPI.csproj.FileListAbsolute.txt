@@ -321,7 +321,6 @@ D:\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netc
 D:\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-D:\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.csprojAssemblyReference.cache
 D:\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\staticwebassets\ContentOutSourceAPI.StaticWebAssets.Manifest.cache
 D:\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\staticwebassets\ContentOutSourceAPI.StaticWebAssets.xml
 D:\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.AssemblyInfoInputs.cache
@@ -505,3 +504,4 @@ D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourc
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.MvcApplicationPartsAssemblyInfo.cs
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.MvcApplicationPartsAssemblyInfo.cache
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.csproj.CopyComplete
+D:\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.csprojAssemblyReference.cache

@@ -10,6 +10,7 @@ namespace ContentOutSourceAPI.Models
             PostHistory = new HashSet<PostHistory>();
             TblPostsHavingKeywords = new HashSet<TblPostsHavingKeywords>();
             TblUsersHavingPosts = new HashSet<TblUsersHavingPosts>();
+            TransactionHistory = new HashSet<TransactionHistory>();
         }
 
         public int Id { get; set; }
@@ -19,12 +20,13 @@ namespace ContentOutSourceAPI.Models
         public long Amount { get; set; }
         public string PostType { get; set; }
         public string RelatedDocument { get; set; }
-        public Boolean IsPublic { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public bool? IsPublic { get; set; }
+        public DateTime? CreatedDate { get; set; }
         public string Status { get; set; }
 
         public virtual ICollection<PostHistory> PostHistory { get; set; }
         public virtual ICollection<TblPostsHavingKeywords> TblPostsHavingKeywords { get; set; }
         public virtual ICollection<TblUsersHavingPosts> TblUsersHavingPosts { get; set; }
+        public virtual ICollection<TransactionHistory> TransactionHistory { get; set; }
     }
 }

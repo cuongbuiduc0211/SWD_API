@@ -77,11 +77,11 @@ namespace ContentOutSourceAPI.Controllers
             return null;
         }
 
-        
+
         [HttpPost("acceptedPosts")]
         public async Task<ActionResult<List<TblPosts>>> GetAcceptedPosts(UsernameDTO usernameDTO)
         {
-            
+
             List<TblUsersHavingPosts> listRequested = _context.TblUsersHavingPosts
                 .FromSqlRaw("select * from tblUsersHavingPosts where Username = {0} and Status = 'requested'", usernameDTO.Username)
                 .ToList<TblUsersHavingPosts>();
@@ -94,7 +94,7 @@ namespace ContentOutSourceAPI.Controllers
                 _context.TblUsersHavingPosts.RemoveRange(listRequested);
                 await _context.SaveChangesAsync();
                 return listAccepted;
-               
+
             }
             return null;
         }
@@ -195,7 +195,7 @@ namespace ContentOutSourceAPI.Controllers
         }
 
 
-        
+
 
         private bool TblUsersHavingPostsExists(int id)
         {

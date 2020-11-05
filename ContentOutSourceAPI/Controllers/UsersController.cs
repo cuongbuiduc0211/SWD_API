@@ -36,10 +36,11 @@ namespace ContentOutSourceAPI.Controllers
 
 
         [HttpGet("listFreelancer")]
-        public async Task<ActionResult<List<TblUsers>>> ListFreelancer() {
+        public async Task<ActionResult<List<TblUsers>>> ListFreelancer()
+        {
             List<TblUsers> listFreelancer = _context.TblUsers
                 .FromSqlRaw("select * from TblUsers where RoleId = 2").ToList<TblUsers>();
-            
+
             if (listFreelancer.Count > 0)
             {
                 return listFreelancer;
@@ -62,15 +63,15 @@ namespace ContentOutSourceAPI.Controllers
             return BadRequest();
         }
 
-        
+
 
         [HttpPost("loginAdmin")]
-        public async Task<ActionResult<TblUsers>> CheckLoginAdmin (TblUsers admin)
+        public async Task<ActionResult<TblUsers>> CheckLoginAdmin(TblUsers admin)
         {
             TblUsers userEntity = _context.TblUsers.Find(admin.Username);
-            if(userEntity != null)
+            if (userEntity != null)
             {
-                if(userEntity.RoleId == 1)
+                if (userEntity.RoleId == 1)
                 {
                     if (userEntity.Password.Equals(admin.Password))
                     {
@@ -82,7 +83,7 @@ namespace ContentOutSourceAPI.Controllers
         }
 
         [HttpPost("loginUser")]
-        public async Task<ActionResult<TblUsers>> CheckLoginUser ([FromBody]LoginUserDTO loginUserDTO)
+        public async Task<ActionResult<TblUsers>> CheckLoginUser([FromBody]LoginUserDTO loginUserDTO)
         {
             TblUsers userEntity = _context.TblUsers.Find(loginUserDTO.Username);
             if (userEntity != null)
@@ -167,7 +168,7 @@ namespace ContentOutSourceAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
 
-       
+
 
         [HttpPost]
         public async Task<ActionResult<TblUsers>> PostTblUsers(TblUsers tblUsers)

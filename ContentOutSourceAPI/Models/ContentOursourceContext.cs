@@ -6,7 +6,6 @@ namespace ContentOutSourceAPI.Models
 {
     public partial class ContentOursourceContext : DbContext
     {
-
         public ContentOursourceContext(DbContextOptions<ContentOursourceContext> options)
             : base(options)
         {
@@ -23,6 +22,14 @@ namespace ContentOutSourceAPI.Models
         public virtual DbSet<TransactionHistory> TransactionHistory { get; set; }
         public virtual DbSet<UsersHavingKeywords> UsersHavingKeywords { get; set; }
 
+//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//        {
+//            if (!optionsBuilder.IsConfigured)
+//            {
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//                optionsBuilder.UseSqlServer("Server=localhost;Database=ContentOursource;Trusted_Connection=True;");
+//            }
+//        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -72,6 +79,10 @@ namespace ContentOutSourceAPI.Models
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.PostType).HasMaxLength(100);
+
                 entity.Property(e => e.Status)
                     .IsRequired()
                     .HasMaxLength(100);
@@ -120,6 +131,10 @@ namespace ContentOutSourceAPI.Models
 
                 entity.Property(e => e.Username).HasMaxLength(100);
 
+                entity.Property(e => e.Avatar).IsUnicode(false);
+
+                entity.Property(e => e.Fullname).HasMaxLength(100);
+
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasMaxLength(100);
@@ -141,16 +156,20 @@ namespace ContentOutSourceAPI.Models
 
                 entity.Property(e => e.Status).HasMaxLength(100);
 
-                entity.Property(e => e.Username).HasMaxLength(100);
+                entity.Property(e => e.Username)
+                    .IsRequired()
+                    .HasMaxLength(100);
 
                 entity.HasOne(d => d.Post)
                     .WithMany(p => p.TblUsersHavingPosts)
                     .HasForeignKey(d => d.PostId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__tblUsersH__PostI__34C8D9D1");
 
                 entity.HasOne(d => d.UsernameNavigation)
                     .WithMany(p => p.TblUsersHavingPosts)
                     .HasForeignKey(d => d.Username)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__tblUsersH__Usern__33D4B598");
             });
 
@@ -166,6 +185,11 @@ namespace ContentOutSourceAPI.Models
                     .WithMany(p => p.TransactionHistoryGiverNavigation)
                     .HasForeignKey(d => d.Giver)
                     .HasConstraintName("FK__Transacti__Giver__6754599E");
+
+                entity.HasOne(d => d.Post)
+                    .WithMany(p => p.TransactionHistory)
+                    .HasForeignKey(d => d.PostId)
+                    .HasConstraintName("FK_TransactionHistory_tblPosts");
 
                 entity.HasOne(d => d.ReceiverNavigation)
                     .WithMany(p => p.TransactionHistoryReceiverNavigation)

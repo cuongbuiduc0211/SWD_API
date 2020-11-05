@@ -15,7 +15,7 @@ namespace ContentOutSourceAPI.Controllers
     public class PostsController : ControllerBase
     {
         private readonly ContentOursourceContext _context;
-        
+
 
         public PostsController(ContentOursourceContext context)
         {
@@ -25,10 +25,10 @@ namespace ContentOutSourceAPI.Controllers
         [HttpPost("WriterPost")]
         public async Task<ActionResult<List<TblPosts>>> GetWriterPost([FromBody]UsernameDTO usernameDTO)
         {
-           List<TblPosts> listNotHaving = getListPostNotInHavingPosts(usernameDTO.Username);
+            List<TblPosts> listNotHaving = getListPostNotInHavingPosts(usernameDTO.Username);
             List<TblPosts> listResponse = new List<TblPosts>();
-           
-            for(int i = 0; i < listNotHaving.Count; i++)
+
+            for (int i = 0; i < listNotHaving.Count; i++)
             {
                 TblPosts currentPost = listNotHaving[i];
                 if (currentPost.PostType.Equals("Writer"))
@@ -39,7 +39,7 @@ namespace ContentOutSourceAPI.Controllers
 
             return listResponse;
 
-         }
+        }
 
 
         //Hàm này trả về list Post không có trong tblUserHavingPosts
@@ -95,13 +95,13 @@ namespace ContentOutSourceAPI.Controllers
         //Hàm này trả về index trong 1 list
         private int findIndexByIdPodst(int id, List<TblPosts> listPostResponse)
         {
-            
 
-            for(int i = 0; i < listPostResponse.Count; i++)
+
+            for (int i = 0; i < listPostResponse.Count; i++)
             {
                 TblPosts currentPost = listPostResponse[i];
 
-                if(currentPost.Id == id)
+                if (currentPost.Id == id)
                 {
                     return i;
                 }
