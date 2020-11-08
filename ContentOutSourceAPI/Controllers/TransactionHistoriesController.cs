@@ -32,17 +32,20 @@ namespace ContentOutSourceAPI.Controllers
             TblUsersHavingPosts usersHavingPosts = _context.TblUsersHavingPosts.FromSqlRaw("select * from TblUsersHavingPosts where " +
                 "Username = {0} and PostId = {1}", dto.Receiver, dto.PostId).First(); //tìm bài post của freelancer đã hoàn thành
             usersHavingPosts.Status = "finished"; //set status = finished
-            _context.Entry(usersHavingPosts).State = EntityState.Modified; //cập nhật
+            _context.Entry(usersHavingPosts).State = EntityState.Modified;
             TblPosts post = _context.TblPosts.FromSqlRaw("select * from TblPosts where " +
                 "Id = {0}", dto.PostId).First(); //tìm bài post trong TblPosts
             post.IsPublic = false; //ko public bài post nữa
-            _context.Entry(post).State = EntityState.Modified; //cập nhật
+            _context.Entry(post).State = EntityState.Modified;
             Int64 postAmount = _context.TblPosts.Find(dto.PostId).Amount; //lấy ra amount của bài post
             transactionHistory.Amount = postAmount; //lưu vào transaction history
             _context.TransactionHistory.Add(transactionHistory); //add transaction dto vào table TransactionHistory
-            TblUsers user = _context.TblUsers.Find(dto.Receiver); //tìm ra freelancer
-            user.Amount += postAmount; //lấy amount hiện tại của freelancer + amount của bài  post đã finished
-            _context.Entry(user).State = EntityState.Modified; // cập nhật
+            TblUsers company = _context.TblUsers.Find(dto.Giver); //tìm ra company
+            company.Amount -= postAmount; //lấy amount hiện tại của company - amount của bài post đã finished
+            _context.Entry(company).State = EntityState.Modified;
+            TblUsers freelancer = _context.TblUsers.Find(dto.Receiver); //tìm ra freelancer
+            freelancer.Amount += postAmount; //lấy amount hiện tại của freelancer + amount của bài post đã finished
+            _context.Entry(freelancer).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return transactionHistory;
         }
@@ -52,12 +55,12 @@ namespace ContentOutSourceAPI.Controllers
         {
             List<TransactionHistoryShowUp> listResponse = new List<TransactionHistoryShowUp>();
             List<TransactionHistory> listTransaction = _context.TransactionHistory
-                .FromSqlRaw("select PostId from TransactionHistory where Receiver = {0}", usernameDTO).ToList<TransactionHistory>();
+                .FromSqlRaw("select * from TransactionHistory where Receiver = {0}", usernameDTO.Username).ToList<TransactionHistory>();
             for (int i = 0; i < listTransaction.Count; i++)
             {
                 TransactionHistory current = listTransaction[i];
                 TransactionHistoryShowUp response = new TransactionHistoryShowUp();
-                response.PostTitle = _context.TblPosts.Find(current).Title;
+                response.PostTitle = _context.TblPosts.Find(current.PostId).Title;
                 response.TransactionDate = current.TransactionDate;
                 response.Amount = current.Amount;
                 listResponse.Add(response);
