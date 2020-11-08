@@ -36,16 +36,15 @@ namespace ContentOutSourceAPI
             var connection = Configuration.GetConnectionString("ContentOursource");
             services.AddDbContextPool<ContentOursourceContext>(options => options.UseSqlServer(connection));
             services.AddControllers();
-            services.AddControllersWithViews()
-    .AddNewtonsoftJson(options =>
-    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-);
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddSwaggerGen(c =>
            {
                c.SwaggerDoc("v1", new OpenApiInfo());
            });
 
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,7 +64,7 @@ namespace ContentOutSourceAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            
+
 
             app.UseHttpsRedirection();
 

@@ -99,6 +99,23 @@ namespace ContentOutSourceAPI.Controllers
             return null;
         }
 
+        [HttpPost("companyPosts")]
+        public async Task<ActionResult<List<TblPosts>>> GetCompanyPosts(UsernameDTO usernameDTO)
+        {
+            List<TblPosts> listCompanyPosts = new List<TblPosts>();
+            List<TblUsersHavingPosts> listCreatedPosts = _context.TblUsersHavingPosts
+                .FromSqlRaw("select PostId from tblUsersHavingPosts where Username = {0} and Status = 'created'", usernameDTO.Username)
+                .ToList<TblUsersHavingPosts>();
+           for (int i = 0; i < listCreatedPosts.Count; i++)
+           {
+                TblUsersHavingPosts curCreatedPost = listCreatedPosts[i];
+                TblPosts companyPost = _context.TblPosts.Find(curCreatedPost);
+                listCompanyPosts.Add(companyPost);
+           }       
+            return listCompanyPosts;
+        }
+       
+
         // GET: api/UsersHavingPosts
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TblUsersHavingPosts>>> GetTblUsersHavingPosts()

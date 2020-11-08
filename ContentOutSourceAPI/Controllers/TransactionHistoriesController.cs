@@ -47,7 +47,7 @@ namespace ContentOutSourceAPI.Controllers
             return transactionHistory;
         }
 
-        [HttpGet("transactions")]
+        [HttpPost("getTransactions")]
         public async Task<ActionResult<List<TransactionHistoryShowUp>>> GetTransactionHistoryByName(UsernameDTO usernameDTO)
         {
             List<TransactionHistoryShowUp> listResponse = new List<TransactionHistoryShowUp>();

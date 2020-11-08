@@ -82,6 +82,34 @@ namespace ContentOutSourceAPI.Controllers
             return Unauthorized();
         }
 
+        [HttpPut("status")]
+        public async Task<ActionResult<TblUsers>> setStatus(UsernameDTO usernameDTO)
+        {
+            TblUsers userEntity = _context.TblUsers
+                .FromSqlRaw("select * from tblUsers where Username = {0}", usernameDTO.Username).First();
+            if (userEntity != null)
+            {
+                if (userEntity.Status.Equals("active"))
+                {
+                    userEntity.Status = "banned";
+                    _context.Entry(userEntity).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                }
+                else if (userEntity.Status.Equals("banned"))
+                {
+                    userEntity.Status = "active";
+                    _context.Entry(userEntity).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                }
+            }
+            else
+            {
+                return NotFound();
+            }
+            return userEntity;
+            
+        }
+
         [HttpPost("loginUser")]
         public async Task<ActionResult<TblUsers>> CheckLoginUser([FromBody]LoginUserDTO loginUserDTO)
         {
