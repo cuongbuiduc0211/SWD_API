@@ -354,6 +354,7 @@ D:\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.
 D:\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 D:\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.MvcApplicationPartsAssemblyInfo.cs
 D:\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.MvcApplicationPartsAssemblyInfo.cache
+D:\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.csprojAssemblyReference.cache
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\System.Web.Http.dll
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
@@ -503,4 +504,5 @@ D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourc
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.MvcApplicationPartsAssemblyInfo.cs
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.MvcApplicationPartsAssemblyInfo.cache
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.csproj.CopyComplete
-D:\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.csprojAssemblyReference.cache
+D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\hoangtugio - Web Deploy\profile.arm.json
+D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.GeneratedMSBuildEditorConfig.editorconfig
