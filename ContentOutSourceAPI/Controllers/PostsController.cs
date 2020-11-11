@@ -23,6 +23,18 @@ namespace ContentOutSourceAPI.Controllers
             _context = context;
         }
 
+        [HttpGet("postsbymonth")]
+        public async Task<ActionResult<PostByMonth>> NumberPostByMonth(string month)
+        {
+            //List<TblPosts> posts = _context.TblPosts.FromSqlRaw("SELECT count(p.Id) AS numberpost FROM tblPosts p " +
+            //    "WHERE(Month(p.CreatedDate) = {0}", month).ToList<TblPosts>();
+            List<TblPosts> posts = _context.TblPosts.FromSqlRaw("select * from tblPosts where CreatedDate = {0}", month).ToList<TblPosts>();
+            PostByMonth postByMonth = new PostByMonth();
+            postByMonth.numberPosts = posts.Count;
+            postByMonth.month = month;      
+            return postByMonth;
+        }
+
         [HttpGet("testFunction/{id}")]
         public IActionResult testFunction(int id)
         {
@@ -73,7 +85,7 @@ namespace ContentOutSourceAPI.Controllers
             List<TblPostsHavingKeywords> listHavingKeyword = _context.TblPostsHavingKeywords.ToList<TblPostsHavingKeywords>();
             List<TblKeywords> listTblKeywords = _context.TblKeywords.ToList<TblKeywords>();
 
-            List<int> listKeywordID = new List<int>();
+            List<int?> listKeywordID = new List<int?>();
             List<string> listKeywordResponse = new List<string>();
 
             // Lấy ra 1 list KeywordID
@@ -83,7 +95,7 @@ namespace ContentOutSourceAPI.Controllers
 
                 if(id == current.PostId)
                 {
-                    listKeywordID.Add(current.Id);
+                    listKeywordID.Add(current.KeywordId);
                 }
             }
 
@@ -92,7 +104,7 @@ namespace ContentOutSourceAPI.Controllers
             {
                 for(int i = 0; i < listKeywordID.Count; i++)
                 {
-                    int currentListID = listKeywordID[i];
+                    int? currentListID = listKeywordID[i];
                     
                     for(int j = 0; j < listTblKeywords.Count; j++)
                     {

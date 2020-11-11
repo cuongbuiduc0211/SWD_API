@@ -28,7 +28,7 @@ namespace ContentOutSourceAPI.Controllers
             transactionHistory.PostId = dto.PostId;
             transactionHistory.Giver = dto.Giver;
             transactionHistory.Receiver = dto.Receiver;
-            transactionHistory.TransactionDate = dto.TransactionDate;
+            transactionHistory.TransactionDate = DateTime.Now;
             TblUsersHavingPosts usersHavingPosts = _context.TblUsersHavingPosts.FromSqlRaw("select * from TblUsersHavingPosts where " +
                 "Username = {0} and PostId = {1}", dto.Receiver, dto.PostId).First(); //tìm bài post của freelancer đã hoàn thành
             usersHavingPosts.Status = "finished"; //set status = finished

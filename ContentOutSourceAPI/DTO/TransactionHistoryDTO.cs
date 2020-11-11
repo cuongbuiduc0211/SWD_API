@@ -10,6 +10,6 @@ namespace ContentOutSourceAPI.DTO
         public int PostId { get; set; }
         public string Giver { get; set; }
         public string Receiver { get; set; }
-        public DateTime TransactionDate { get; set; }
+        //public DateTime TransactionDate { get; set; }
     }
 }
