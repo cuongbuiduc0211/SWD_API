@@ -22,6 +22,13 @@ namespace ContentOutSourceAPI.Controllers
             _context = context;
         }
 
+        [HttpPost("userBeans")]
+        public async Task<ActionResult<float>> GetUserBeans(UsernameDTO usernameDTO)
+        {
+            float amount = _context.TblUsers.Find(usernameDTO.Username).Amount;
+            return amount;
+        }
+
         [HttpGet("totalPostAndUser")]
         public async Task<ActionResult<NumberDTO>> GetTotalPostAndUser()
         {
@@ -62,8 +69,6 @@ namespace ContentOutSourceAPI.Controllers
 
             return BadRequest();
         }
-
-
 
         [HttpPost("loginAdmin")]
         public async Task<ActionResult<TblUsers>> CheckLoginAdmin(TblUsers admin)
@@ -196,8 +201,6 @@ namespace ContentOutSourceAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
 
-
-
         [HttpPost]
         public async Task<ActionResult<TblUsers>> PostTblUsers(TblUsers tblUsers)
         {
@@ -230,123 +233,6 @@ namespace ContentOutSourceAPI.Controllers
             return CreatedAtAction("GetTblUsers", new { id = tblUsers.Username }, tblUsers);
         }
 
-        [HttpPost("findMatchingWriter")]
-        public async Task<ActionResult<TblUsers>> FindMacthingWriter(String customerUsername, String copywriterUsername)
-        {
-            List<TblUsers> listWriters = new List<TblUsers>();
-            List<UsersHavingKeywords> listKeywordsOfCustomer = _context.UsersHavingKeywords
-                .FromSqlRaw("select Username, KeywordId from UsersHavingKeywords where Username = {0}", customerUsername)
-                .ToList<UsersHavingKeywords>();
-            List<UsersHavingKeywords> listKeywordsOfCopywriter = _context.UsersHavingKeywords
-                .FromSqlRaw("select Username, KeywordId from UsersHavingKeywords where Username = {0}", copywriterUsername)
-                .ToList<UsersHavingKeywords>();
-            for (int i = 0; i < listKeywordsOfCustomer.Count; i++)
-            {
-                for (int j = 0; j < listKeywordsOfCopywriter.Count; j++)
-                {
-                    if (listKeywordsOfCustomer[i].KeywordId == listKeywordsOfCopywriter[j].KeywordId)
-                    {
-                        listWriters.Add(_context.TblUsers.Find(listKeywordsOfCopywriter[j].Username));
-                    }
-                }
-            }
-            if (listWriters.Count > 0)
-            {
-                return listWriters[0];
-            }
-            return BadRequest();
-        }
-
-        [HttpPost("findMatchingWriters")]
-        public async Task<ActionResult<List<TblUsers>>> FindMacthingWriters(String customerUsername)
-        {
-            ISet<TblUsers> listWriters = new HashSet<TblUsers>();
-            List<UsersHavingKeywords> listKeywordsOfCustomer = _context.UsersHavingKeywords
-                .FromSqlRaw("select Username, KeywordId from UsersHavingKeywords where Username = {0}", customerUsername)
-                .ToList<UsersHavingKeywords>();
-            List<UsersHavingKeywords> listKeywordsOfCopywriter = _context.UsersHavingKeywords
-                .FromSqlRaw("select Username, KeywordId from UsersHavingKeywords where Username != {0}", customerUsername)
-                .ToList<UsersHavingKeywords>();
-            for (int i = 0; i < listKeywordsOfCustomer.Count; i++)
-            {
-                for (int j = 0; j < listKeywordsOfCopywriter.Count; j++)
-                {
-                    if (listKeywordsOfCustomer[i].KeywordId == listKeywordsOfCopywriter[j].KeywordId)
-                    {
-                        listWriters.Add(_context.TblUsers.Find(listKeywordsOfCopywriter[j].Username));
-                    }
-                }
-            }
-            if (listWriters.Count > 0)
-            {
-                return listWriters.ToList();
-            }
-            return BadRequest();
-        }
-
-        [HttpPost("findMatchingWriterByPostKeywords")]
-        public async Task<ActionResult<List<TblUsers>>> FindMacthingWriterByPostKeywords(int postId, String copywriterUsername)
-        {
-            List<TblUsers> listWriters = new List<TblUsers>();
-            List<TblPostsHavingKeywords> listKeywordsOfPost = _context.TblPostsHavingKeywords
-              //  .FromSqlRaw("select KeywordId from TblPostsHavingKeywords where PostId = {0}", postId)
-              .Where(p => p.PostId == postId)
-              .Select(p => p)
-                .ToList<TblPostsHavingKeywords>();
-            List<UsersHavingKeywords> listKeywordsOfCopywriter = _context.UsersHavingKeywords
-               // .FromSqlRaw("select KeywordId from UsersHavingKeywords where Username = {0}", copywriterUsername)
-               .Where(u => u.Username == copywriterUsername)
-               .Select(u => u)
-                .ToList<UsersHavingKeywords>();
-
-            for (int i = 0; i < listKeywordsOfPost.Count; i++)
-            {
-                for (int j = 0; j < listKeywordsOfCopywriter.Count; j++)
-                {
-                    if (listKeywordsOfPost[i].KeywordId == listKeywordsOfCopywriter[j].KeywordId)
-                    {
-                        listWriters.Add(_context.TblUsers.Find(listKeywordsOfCopywriter[j].Username));
-                    }
-                }
-            }
-            if (listWriters.Count > 0)
-            {
-                return listWriters;
-            }
-            return BadRequest();
-        }
-
-        [HttpPost("findMatchingWriterBysPostKeywords")]
-        public async Task<ActionResult<List<TblUsers>>> FindMacthingWritersByPostKeywords(int postId, String customerName)
-        {
-            ISet<TblUsers> listWriters = new HashSet<TblUsers>();
-            List<TblPostsHavingKeywords> listKeywordsOfPost = _context.TblPostsHavingKeywords
-              //  .FromSqlRaw("select KeywordId from TblPostsHavingKeywords where PostId = {0}", postId)
-              .Where(p => p.PostId == postId)
-              .Select(p => p)
-                .ToList<TblPostsHavingKeywords>();
-            List<UsersHavingKeywords> listKeywordsOfCopywriter = _context.UsersHavingKeywords
-               // .FromSqlRaw("select KeywordId from UsersHavingKeywords where Username = {0}", copywriterUsername)
-               .Where(u => u.Username != customerName)
-               .Select(u => u)
-                .ToList<UsersHavingKeywords>();
-
-            for (int i = 0; i < listKeywordsOfPost.Count; i++)
-            {
-                for (int j = 0; j < listKeywordsOfCopywriter.Count; j++)
-                {
-                    if (listKeywordsOfPost[i].KeywordId == listKeywordsOfCopywriter[j].KeywordId)
-                    {
-                        listWriters.Add(_context.TblUsers.Find(listKeywordsOfCopywriter[j].Username));
-                    }
-                }
-            }
-            if (listWriters.Count > 0)
-            {
-                return listWriters.ToList();
-            }
-            return BadRequest();
-        }
         // DELETE: api/Users/5
 
         [HttpDelete("{id}")]
