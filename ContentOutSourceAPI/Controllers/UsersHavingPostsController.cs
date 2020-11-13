@@ -75,10 +75,10 @@ namespace ContentOutSourceAPI.Controllers
             List<PostAndKeyword> listPostAndKeywordResponse = new List<PostAndKeyword>();
             if (list.Count > 0)
             {
-               for(int i = 0; i < list.Count; i++)
+                for (int i = 0; i < list.Count; i++)
                 {
                     TblPosts currentPost = list[i];
-                    if (currentPost.PostType.Equals("Writer"))
+                    if (currentPost.PostType.Equals("Writer") || currentPost.PostType.Equals("Design") || currentPost.PostType.Equals("Translate"))
                     {
                         listResponse.Add(currentPost);
 

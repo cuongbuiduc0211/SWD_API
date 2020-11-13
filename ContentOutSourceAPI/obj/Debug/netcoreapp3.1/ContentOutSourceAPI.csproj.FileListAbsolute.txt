@@ -505,6 +505,6 @@ D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourc
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.MvcApplicationPartsAssemblyInfo.cache
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.csproj.CopyComplete
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\hoangtugio - Web Deploy\profile.arm.json
-D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.GeneratedMSBuildEditorConfig.editorconfig
 D:\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\hoangtugio - Web Deploy\profile.arm.json
 D:\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\louisnguyen - Web Deploy\profile.arm.json
+D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\louisnguyen - Web Deploy\profile.arm.json
