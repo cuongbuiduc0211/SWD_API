@@ -168,3 +168,4 @@ D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Release\netcoreapp3.1\Microsoft.Asp
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Release\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Release\netcoreapp3.1\Properties\ServiceDependencies\hoangtugio - Web Deploy\profile.arm.json
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Release\netcoreapp3.1\ContentOutSourceAPI.GeneratedMSBuildEditorConfig.editorconfig
+D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Release\netcoreapp3.1\Properties\ServiceDependencies\louisnguyen - Web Deploy\profile.arm.json
