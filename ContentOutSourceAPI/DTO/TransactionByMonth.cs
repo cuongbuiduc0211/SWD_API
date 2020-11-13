@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ContentOutSourceAPI.DTO
 {
-    public class PostByMonth
+    public class TransactionByMonth
     {
-        public int numberPosts { get; set; }
+        public int numberTransaction { get; set; }
         public int month { get; set; }
     }
 }

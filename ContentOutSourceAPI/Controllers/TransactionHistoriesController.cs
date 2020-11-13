@@ -21,6 +21,26 @@ namespace ContentOutSourceAPI.Controllers
             _context = context;
         }
 
+        [HttpGet("transactionsbymonth")]
+        public async Task<ActionResult<List<TransactionByMonth>>> NumberPostByMonth()
+        {
+            //List<TblPosts> posts = _context.TblPosts.FromSqlRaw("SELECT count(p.Id) AS numberpost FROM tblPosts p " +
+            //    "WHERE(Month(p.CreatedDate) = {0}", month).ToList<TblPosts>();
+            List<TransactionByMonth> transactionsbymonth = new List<TransactionByMonth>();
+            List<int> month = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            foreach (int m in month)
+            {
+                List<TransactionHistory> transactions = _context.TransactionHistory
+                    .FromSqlRaw("select * from TransactionHistory where Month(TransactionDate) = {0}", m)
+                    .ToList<TransactionHistory>();
+                TransactionByMonth transactionbymonth = new TransactionByMonth();
+                transactionbymonth.numberTransaction = transactions.Count;
+                transactionbymonth.month = m;
+                transactionsbymonth.Add(transactionbymonth);
+            }
+            return transactionsbymonth;
+        }
+
         [HttpPost("transaction")]
         public async Task<ActionResult<TransactionHistory>> createTransactionHistory(TransactionHistoryDTO dto)
         {

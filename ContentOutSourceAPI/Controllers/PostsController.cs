@@ -24,15 +24,21 @@ namespace ContentOutSourceAPI.Controllers
         }
 
         [HttpGet("postsbymonth")]
-        public async Task<ActionResult<PostByMonth>> NumberPostByMonth(string month)
+        public async Task<ActionResult<List<PostByMonth>>> NumberPostByMonth()
         {
             //List<TblPosts> posts = _context.TblPosts.FromSqlRaw("SELECT count(p.Id) AS numberpost FROM tblPosts p " +
             //    "WHERE(Month(p.CreatedDate) = {0}", month).ToList<TblPosts>();
-            List<TblPosts> posts = _context.TblPosts.FromSqlRaw("select * from tblPosts where CreatedDate = {0}", month).ToList<TblPosts>();
-            PostByMonth postByMonth = new PostByMonth();
-            postByMonth.numberPosts = posts.Count;
-            postByMonth.month = month;      
-            return postByMonth;
+            List<PostByMonth> postByMonths = new List<PostByMonth>();
+            List<int> month = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            foreach (int m in month)
+            {
+                List<TblPosts> posts = _context.TblPosts.FromSqlRaw("select * from tblPosts where Month(CreatedDate) = {0}", m).ToList<TblPosts>();
+                PostByMonth postByMonth = new PostByMonth();
+                postByMonth.numberPosts = posts.Count;
+                postByMonth.month = m;
+                postByMonths.Add(postByMonth);
+            }
+            return postByMonths;
         }
 
         [HttpGet("testFunction/{id}")]
@@ -128,7 +134,7 @@ namespace ContentOutSourceAPI.Controllers
                .FromSqlRaw("select * from TblUsersHavingPosts")
                .ToList<TblUsersHavingPosts>();
             List<TblPosts> listPost = _context.TblPosts
-                .FromSqlRaw("select * from TblPosts")
+                .FromSqlRaw("select * from TblPosts where IsPublic = 1")
                 .ToList<TblPosts>();
 
             List<int> listPostId = new List<int>();
