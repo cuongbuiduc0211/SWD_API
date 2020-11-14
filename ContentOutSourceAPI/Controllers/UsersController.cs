@@ -23,9 +23,9 @@ namespace ContentOutSourceAPI.Controllers
         }
 
         [HttpPost("userBeans")]
-        public async Task<ActionResult<float>> GetUserBeans(UsernameDTO usernameDTO)
+        public async Task<ActionResult<int>> GetUserBeans(UsernameDTO usernameDTO)
         {
-            float amount = _context.TblUsers.Find(usernameDTO.Username).Amount;
+            int amount = (int) _context.TblUsers.Find(usernameDTO.Username).Amount;
             return amount;
         }
 

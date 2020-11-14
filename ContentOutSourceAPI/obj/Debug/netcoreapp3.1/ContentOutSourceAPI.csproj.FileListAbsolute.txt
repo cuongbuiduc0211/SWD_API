@@ -355,6 +355,10 @@ D:\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.
 D:\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.MvcApplicationPartsAssemblyInfo.cs
 D:\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.MvcApplicationPartsAssemblyInfo.cache
 D:\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.csprojAssemblyReference.cache
+D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\hoangtugio - Web Deploy\profile.arm.json
+D:\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\hoangtugio - Web Deploy\profile.arm.json
+D:\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\louisnguyen - Web Deploy\profile.arm.json
+D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\louisnguyen - Web Deploy\profile.arm.json
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\System.Web.Http.dll
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
@@ -500,11 +504,8 @@ D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\runtimes\win-x8
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.GeneratedMSBuildEditorConfig.editorconfig
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.csproj.CoreCompileInputs.cache
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.MvcApplicationPartsAssemblyInfo.cs
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.MvcApplicationPartsAssemblyInfo.cache
 D:\Half8\SWD\SWD_API\ContentOutSourceAPI\obj\Debug\netcoreapp3.1\ContentOutSourceAPI.csproj.CopyComplete
-D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\hoangtugio - Web Deploy\profile.arm.json
-D:\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\hoangtugio - Web Deploy\profile.arm.json
-D:\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\louisnguyen - Web Deploy\profile.arm.json
-D:\Half8\SWD\SWD_API\ContentOutSourceAPI\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\louisnguyen - Web Deploy\profile.arm.json

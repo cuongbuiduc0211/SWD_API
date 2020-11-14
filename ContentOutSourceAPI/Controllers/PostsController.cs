@@ -23,6 +23,46 @@ namespace ContentOutSourceAPI.Controllers
             _context = context;
         }
 
+        [HttpGet("getTotalPostToChart")]
+        public IActionResult getTotalPostToChart()
+        {
+            int nWriter = 0;
+            int nDesign = 0;
+            int nTranslate = 0;
+
+            PostChartDTO postChartDTO = new PostChartDTO();
+            List<TblPosts> listPost = _context.TblPosts.ToList<TblPosts>();
+
+            for(int i = 0; i < listPost.Count; i++)
+            {
+                
+                TblPosts currentPost = listPost[i];
+
+                if (currentPost.IsPublic == true)
+                {
+                    if (currentPost.PostType.Equals("Writer"))
+                    {
+                        nWriter++;
+                    }
+                    if (currentPost.PostType.Equals("Design"))
+                    {
+                        nDesign++;
+                    }
+                    if (currentPost.PostType.Equals("Translate"))
+                    {
+                        nTranslate++;
+                    }
+                }
+            }
+
+            postChartDTO.NumberWriter = nWriter;
+            postChartDTO.NumberDesign = nDesign;
+            postChartDTO.NumberTranslate = nTranslate;
+
+
+            return Ok(postChartDTO);
+        }
+
         [HttpGet("postsbymonth")]
         public async Task<ActionResult<List<PostByMonth>>> NumberPostByMonth()
         {
