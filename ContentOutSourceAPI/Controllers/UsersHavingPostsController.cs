@@ -166,7 +166,7 @@ namespace ContentOutSourceAPI.Controllers
                 for (int i = 0; i < listAccepted.Count; i++)
                 {
                     TblPosts currentPost = listAccepted[i];
-                    if (currentPost.PostType.Equals("Writer"))
+                    if (currentPost.PostType.Equals("Writer") || currentPost.PostType.Equals("Design") || currentPost.PostType.Equals("Translate"))
                     {
                         listResponse.Add(currentPost);
 
