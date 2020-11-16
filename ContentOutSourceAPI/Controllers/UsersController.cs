@@ -121,9 +121,13 @@ namespace ContentOutSourceAPI.Controllers
             TblUsers userEntity = _context.TblUsers.Find(loginUserDTO.Username);
             if (userEntity != null)
             {
-                if (userEntity.RoleId == 2)
+                if (userEntity.RoleId == 2 && userEntity.Status.Equals("active"))
                 {
                     return userEntity;
+                }
+                else if (userEntity.RoleId == 2 && userEntity.Status.Equals("banned"))
+                {
+                    return NotFound();
                 }
             }
             else
